@@ -9,7 +9,7 @@
   <style>
     body {
       font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #e6f7ff, #ffe6f2, #fff9e6);
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb, #e3f2fd);
       color: #444;
       text-align: center;
       min-height: 100vh;
@@ -29,11 +29,13 @@
     .container {
       display: flex;
       justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
       gap: 20px;
       width: 100%;
       max-width: 800px;
       margin-bottom: 20px;
+      margin-top: 30px;
     }
 
     .meter {
@@ -68,15 +70,15 @@
     .fill {
       height: 100%;
       width: 0;
-      background: linear-gradient(90deg, #b8e994, #f8a5c2);
+      background: linear-gradient(90deg, #81ecec, #55efc4);
       border-radius: 10px;
       transition: width 1s ease;
     }
 
     button {
-      padding: 12px 20px;
+      padding: 8px 16px;
       margin: 30px 10px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: bold;
       background: #6c5ce7;
       border: none;
@@ -112,7 +114,7 @@
   </style>
 </head>
 <body>
-  <h1>Live Dashboard</h1>
+  <h1>Dashboard for Microbial Fuel Cell (ICT Project)</h1>
   <div class="container">
     <div class="meter">
       <h2>pH</h2>
@@ -133,7 +135,7 @@
     </div>
   </div>
 
-  <button id="viewGraphBtn" onclick="showGraph()">View Graph</button>
+  <button id="viewGraphBtn" onclick="showGraph()">Show Graph</button>
 
   <div id="chartContainer">
     <canvas id="myChart"></canvas>
@@ -170,8 +172,8 @@
           datasets: [{
             label: 'Values',
             data: [ph, temp, voltage],
-            backgroundColor: ['#b8e994', '#f8a5c2', '#81ecec'],
-            borderColor: ['#55efc4', '#fd79a8', '#00cec9'],
+            backgroundColor: ['#81ecec', '#55efc4', '#b8e994'],
+            borderColor: ['#00cec9', '#00b894', '#1dd1a1'],
             borderWidth: 1
           }]
         },
