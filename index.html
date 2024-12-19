@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: 'Orbitron', sans-serif;
@@ -70,7 +71,7 @@
 
     button {
       padding: 12px 20px;
-      margin-top: 30px;
+      margin: 30px 10px;
       font-size: 1rem;
       font-weight: bold;
       background: #d1b3ff;
@@ -83,6 +84,13 @@
 
     button:hover {
       background: #b494e5;
+    }
+
+    #chartContainer {
+      display: none;
+      width: 80%;
+      max-width: 600px;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -108,14 +116,20 @@
     </div>
   </div>
 
-  <button onclick="generateValues()">Generate Values</button>
+  <button id="viewGraphBtn" onclick="showGraph()">View Graph</button>
+
+  <div id="chartContainer">
+    <canvas id="myChart"></canvas>
+  </div>
 
   <script>
+    let ph, temp, voltage;
+
     function generateValues() {
       // Generate random values
-      const ph = (Math.random() * 14).toFixed(2);
-      const temp = (Math.random() * 100).toFixed(2);
-      const voltage = (Math.random() * 5).toFixed(2);
+      ph = (Math.random() * 14).toFixed(2);
+      temp = (Math.random() * 100).toFixed(2);
+      voltage = (Math.random() * 5).toFixed(2);
 
       // Display values
       document.getElementById('phValue').textContent = ph;
@@ -127,6 +141,35 @@
       document.getElementById('tempBar').style.width = (temp / 100 * 100) + '%';
       document.getElementById('voltBar').style.width = (voltage / 5 * 100) + '%';
     }
+
+    function showGraph() {
+      document.getElementById('chartContainer').style.display = 'block';
+
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['pH', 'Temperature (°C)', 'Voltage (V)'],
+          datasets: [{
+            label: 'Values',
+            data: [ph, temp, voltage],
+            backgroundColor: ['#ff9a9e', '#fad0c4', '#d1b3ff'],
+            borderColor: ['#ff6384', '#ffcd56', '#36a2eb'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    // Generate values when the page loads
+    window.onload = generateValues;
   </script>
 </body>
 </html>
